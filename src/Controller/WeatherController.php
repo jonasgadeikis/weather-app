@@ -21,6 +21,6 @@ class WeatherController extends AbstractController
         $weather = new WeatherService($request);
         $data = $weather->getData();
 
-        return new JsonResponse($data, 200);
+        return new JsonResponse($data);
     }
 }
