@@ -2,7 +2,7 @@
     <button
         :type="type"
         :class="classes"
-        @click="click"
+        @click.prevent="click"
     >
         <slot />
         {{ name }}

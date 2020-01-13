@@ -2,15 +2,19 @@ import axios from 'axios';
 
 export default {
     state: {
-
+        weatherData: [],
     },
 
     getters: {
-
+        weatherData(state) {
+            return state.weatherData;
+        },
     },
 
     mutations: {
-
+        setWeatherData(state, payload) {
+            state.weatherData.push(payload);
+        },
     },
 
     actions: {
@@ -21,10 +25,15 @@ export default {
                     apiKey: payload.apiKey,
                 }
             }).then(response => {
-                console.log(response.data);
+                const data = {
+                    name: response.data.name,
+                    temp: response.data.main.temp,
+                };
+
+                commit('setWeatherData', data);
             }).catch(error => {
                 console.log(error);
             })
-        }
+        },
     },
 }

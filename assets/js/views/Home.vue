@@ -31,23 +31,36 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" v-if="weatherData.length">
             <div class="col-sm">
                 <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#">Active</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Link</a>
+                    <li
+                        class="nav-item"
+                        v-for="(city, i) in weatherData"
+                        :key="i"
+                    >
+                        <a
+                            class="nav-link"
+                            :class="{'active': activeCity.name === city.name}"
+                            @click.prevent="setActiveCity(city)"
+                        >
+                            {{ city.name }}
+                        </a>
                     </li>
                 </ul>
+            </div>
+        </div>
+        <div class="row mt-3" v-if="weatherData.length">
+            <div class="col-sm">
+                <h2>{{ activeCity.name }}</h2>
+                <p>{{ activeCity.temp }}</p>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import { mapActions } from 'vuex';
+    import { mapActions, mapGetters } from 'vuex';
 
     export default {
         name: "Home",
@@ -56,6 +69,7 @@
             return {
                 city: '',
                 apiKey: '',
+                activeCity: {},
             }
         },
 
@@ -72,6 +86,18 @@
 
                 this.getData(payload);
             },
+
+            setActiveCity(city) {
+                this.activeCity = {
+                    ...city,
+                };
+            },
+        },
+
+        computed: {
+            ...mapGetters([
+                "weatherData",
+            ]),
         },
     }
 </script>
