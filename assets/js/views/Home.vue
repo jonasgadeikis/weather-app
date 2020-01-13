@@ -3,12 +3,22 @@
         <div class="row">
             <div class="col-sm">
                 <div class="input-group my-3">
-                    <input type="text" class="form-control mx-3" placeholder="API key" v-model="apiKey">
+                    <Input
+                        type="text"
+                        classes="form-control"
+                        placeholder="API key"
+                        :model.sync="apiKey"
+                    />
                 </div>
             </div>
             <div class="col-sm">
                 <div class="input-group my-3">
-                    <input type="text" class="form-control" placeholder="City" v-model="city">
+                    <Input
+                        type="text"
+                        classes="form-control"
+                        placeholder="City"
+                        :model.sync="city"
+                    />
                     <div class="input-group-append">
                         <Button
                             type="button"
@@ -39,10 +49,12 @@
 <script>
     import { mapActions } from 'vuex';
     import Button from "../components/Button";
+    import Input from "../components/Input";
 
     export default {
         components: {
             Button,
+            Input,
         },
 
         name: "Home",
