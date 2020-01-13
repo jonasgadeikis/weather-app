@@ -48,15 +48,8 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import Button from "../components/Button";
-    import Input from "../components/Input";
 
     export default {
-        components: {
-            Button,
-            Input,
-        },
-
         name: "Home",
 
         data() {
