@@ -33,27 +33,30 @@
         </div>
         <div class="row" v-if="weatherData.length">
             <div class="col-sm">
-                <ul class="nav nav-tabs">
-                    <li
-                        class="nav-item"
+                <Tabs classes="nav nav-tabs">
+                    <Tab
+                        classes="nav-item"
                         v-for="(city, i) in weatherData"
                         :key="i"
                     >
-                        <a
-                            class="nav-link"
-                            :class="{'active': activeCity.name === city.name}"
-                            @click.prevent="setActiveCity(city)"
-                        >
-                            {{ city.name }}
-                        </a>
-                    </li>
-                </ul>
+                        <Link
+                            :name="city.name"
+                            :classes="[
+                                'nav-link',
+                                {'active': activeCity.name === city.name},
+                            ]"
+                            @click="setActiveCity(city)"
+                        />
+                    </Tab>
+                </Tabs>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm">
-                <h2>{{ activeCity.name }}</h2>
-                <p>{{ activeCity.temp }}</p>
+                <Info
+                    :name="activeCity.name"
+                    :temp="activeCity.temp"
+                />
             </div>
         </div>
     </div>
@@ -61,9 +64,18 @@
 
 <script>
     import { mapActions, mapGetters } from 'vuex';
+    import Tab from "../components/tabs/Tab";
+    import Tabs from "../components/tabs/Tabs";
+    import Info from "../components/tabs/Info";
 
     export default {
         name: "Home",
+
+        components: {
+            Tab,
+            Tabs,
+            Info,
+        },
 
         data() {
             return {

@@ -39,7 +39,7 @@ export default {
                 commit('setWeatherData', data);
             }).catch(error => {
                 console.log(error);
-            })
+            });
         },
     },
 }
