@@ -4,6 +4,7 @@ export default {
     state: {
         weatherData: [],
         errorMessage: '',
+        loadingState: false,
     },
 
     getters: {
@@ -13,6 +14,10 @@ export default {
 
         errorMessage(state) {
             return state.errorMessage;
+        },
+
+        loadingState(state) {
+            return state.loadingState;
         },
     },
 
@@ -36,10 +41,15 @@ export default {
         hideErrorMessage(state) {
             state.errorMessage = '';
         },
+
+        toggleLoadingState(state) {
+            state.loadingState = !state.loadingState;
+        },
     },
 
     actions: {
         getData({commit}, payload) {
+            commit('toggleLoadingState');
             commit('hideErrorMessage');
             axios.get('/api/weather', {
                 params: {
@@ -59,6 +69,8 @@ export default {
                 };
 
                 commit('showErrorMessage', data);
+            }).finally(() => {
+                commit('toggleLoadingState');
             });
         },
     },
