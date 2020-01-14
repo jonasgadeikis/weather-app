@@ -26,7 +26,7 @@ class WeatherService
         $url = 'http://api.openweathermap.org/data/2.5/weather';
 
         try {
-             return $client->request('GET', $url, [
+             $response = $client->request('GET', $url, [
                 'query' => [
                     'q' => $this->city,
                     'appid' => $this->apiKey,
@@ -53,5 +53,13 @@ class WeatherService
         } catch (DecodingExceptionInterface $e) {
             throw new Exception($e->getMessage());
         }
+
+        $convertedTemp = number_format($response['main']['temp'] - 273.15, 0, '.', '') . ' °C';
+
+        return array(
+            'cod' => $response['cod'],
+            'name' => $response['name'],
+            'temp' =>  $convertedTemp,
+        );
     }
 }
