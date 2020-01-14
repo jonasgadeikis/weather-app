@@ -2,6 +2,7 @@
 
 namespace App\Client;
 
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
@@ -25,24 +26,32 @@ class WeatherService
         $url = 'http://api.openweathermap.org/data/2.5/weather';
 
         try {
-            $response = $client->request('GET', $url, [
+             return $client->request('GET', $url, [
                 'query' => [
                     'q' => $this->city,
                     'appid' => $this->apiKey,
                 ]
             ])->toArray();
         } catch (TransportExceptionInterface $e) {
-            $response = $e;
+            throw new Exception($e->getMessage());
         } catch (ClientExceptionInterface $e) {
-            $response = $e;
+            if ($e->getCode() == 401) {
+                return [
+                    'cod' => $e->getCode(),
+                    'message' => 'Invalid API key given.',
+                ];
+            } else if ($e->getCode() == 404) {
+                return [
+                    'cod' => $e->getCode(),
+                    'message' => 'City not found.',
+                ];
+            }
         } catch (RedirectionExceptionInterface $e) {
-            $response = $e;
+            throw new Exception($e->getMessage());
         } catch (ServerExceptionInterface $e) {
-            $response = $e;
+            throw new Exception($e->getMessage());
         } catch (DecodingExceptionInterface $e) {
-            $response = $e;
+            throw new Exception($e->getMessage());
         }
-
-        return $response;
     }
 }

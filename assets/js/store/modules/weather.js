@@ -31,6 +31,7 @@ export default {
                     apiKey: payload.apiKey,
                 }
             }).then(response => {
+                console.log(response);
                 const data = {
                     name: response.data.name,
                     temp: response.data.main.temp,
@@ -38,7 +39,7 @@ export default {
 
                 commit('setWeatherData', data);
             }).catch(error => {
-                console.log(error);
+                console.log(error.response);
             });
         },
     },
