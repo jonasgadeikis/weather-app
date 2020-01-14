@@ -50,7 +50,7 @@
                 </ul>
             </div>
         </div>
-        <div class="row mt-3" v-if="weatherData.length">
+        <div class="row mt-3">
             <div class="col-sm">
                 <h2>{{ activeCity.name }}</h2>
                 <p>{{ activeCity.temp }}</p>
