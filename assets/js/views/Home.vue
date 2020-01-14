@@ -34,8 +34,8 @@
                             classes="btn btn-success"
                             @click="getWeather(apiKey, city)"
                         >
-                            <Spinner v-if="loadingState" />
-                            <i class="fas fa-check" v-else />
+                            <Spinner v-show="loadingState" />
+                            <i class="fas fa-check" v-show="!loadingState" />
                         </Button>
                     </div>
                 </div>
@@ -110,9 +110,7 @@
             },
 
             setActiveCity(city) {
-                this.activeCity = {
-                    ...city,
-                };
+                this.activeCity = city;
             },
         },
 
@@ -125,7 +123,3 @@
         },
     }
 </script>
-
-<style scoped>
-
-</style>
