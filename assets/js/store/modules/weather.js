@@ -49,7 +49,7 @@ export default {
             }).then(response => {
                 const data = {
                     name: response.data.name,
-                    temp: response.data.main.temp,
+                    temp: response.data.temp,
                 };
 
                 commit('setWeatherData', data);
