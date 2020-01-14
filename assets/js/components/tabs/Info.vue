@@ -11,7 +11,7 @@
 
         props: {
             name: String,
-            temp: Number,
+            temp: String,
         }
     }
 </script>
