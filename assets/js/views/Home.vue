@@ -34,7 +34,8 @@
                             classes="btn btn-success"
                             @click="getWeather(apiKey, city)"
                         >
-                            <i class="fas fa-check" />
+                            <Spinner v-if="loadingState" />
+                            <i class="fas fa-check" v-else />
                         </Button>
                     </div>
                 </div>
@@ -119,6 +120,7 @@
             ...mapGetters([
                 "weatherData",
                 "errorMessage",
+                "loadingState",
             ]),
         },
     }
