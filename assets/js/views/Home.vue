@@ -1,8 +1,17 @@
 <template>
     <div class="container">
         <div class="row">
+            <div class="col-sm mt-3">
+                <Error
+                    classes="alert alert-danger"
+                    :message="errorMessage"
+                    v-if="errorMessage"
+                />
+            </div>
+        </div>
+        <div class="row">
             <div class="col-sm">
-                <div class="input-group my-3">
+                <div class="input-group mt-3">
                     <Input
                         type="text"
                         classes="form-control"
@@ -12,7 +21,7 @@
                 </div>
             </div>
             <div class="col-sm">
-                <div class="input-group my-3">
+                <div class="input-group mt-3">
                     <Input
                         type="text"
                         classes="form-control"
@@ -32,7 +41,7 @@
             </div>
         </div>
         <div class="row" v-if="weatherData.length">
-            <div class="col-sm">
+            <div class="col-sm mt-3">
                 <Tabs classes="nav nav-tabs">
                     <Tab
                         classes="nav-item"
@@ -109,6 +118,7 @@
         computed: {
             ...mapGetters([
                 "weatherData",
+                "errorMessage",
             ]),
         },
     }
