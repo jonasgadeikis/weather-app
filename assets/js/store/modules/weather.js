@@ -13,7 +13,13 @@ export default {
 
     mutations: {
         setWeatherData(state, payload) {
-            state.weatherData.push(payload);
+            const duplicate = state.weatherData.find(city => {
+                return city.name === payload.name;
+            });
+
+            if (typeof duplicate === 'undefined') {
+                state.weatherData.push(payload);
+            }
         },
     },
 
