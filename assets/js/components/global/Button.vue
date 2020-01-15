@@ -2,6 +2,7 @@
     <button
         :type="type"
         :class="classes"
+        :disabled="disabled"
         @click.prevent="click"
     >
         <slot />
@@ -16,6 +17,7 @@
         props: {
             name: String,
             classes: String,
+            disabled: Boolean,
             type: String,
         },
 
