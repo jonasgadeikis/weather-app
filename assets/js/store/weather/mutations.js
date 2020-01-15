@@ -1,14 +1,6 @@
 export default {
     setWeatherData(state, payload) {
-        const duplicate = state.weatherData.find(city => {
-            return city.name === payload.name;
-        });
-
-        if (typeof duplicate === 'undefined') {
-            state.weatherData.push(payload);
-        } else {
-            state.errorMessage = 'Duplicate city given.';
-        }
+        state.weatherData.push(payload);
     },
 
     showErrorMessage(state, payload) {
