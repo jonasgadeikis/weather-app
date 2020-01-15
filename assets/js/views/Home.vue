@@ -32,6 +32,7 @@
                         <Button
                             type="button"
                             classes="btn btn-success"
+                            :disabled="loadingState"
                             @click="getWeather(apiKey, city)"
                         >
                             <Spinner v-show="loadingState" />
