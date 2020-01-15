@@ -5,7 +5,7 @@
                 <Error
                     classes="alert alert-danger"
                     :message="errorMessage"
-                    v-if="errorMessage"
+                    v-show="errorMessage"
                 />
             </div>
         </div>
